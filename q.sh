@@ -50,11 +50,9 @@ restart_q_validator_node() {
     docker-compose logs -f --tail "100"
 }
 
-echo && echo -e " ${Red_font_prefix}q_blockchain 一键安装脚本${Font_color_suffix} by \033[1;35moooooyoung\033[0m
-此脚本完全免费开源, 由推特用户 ${Green_font_prefix}@ouyoung11开发${Font_color_suffix}, 
-欢迎关注, 如有收费请勿上当受骗。
+echo && echo -e " 
  ———————————————————————
- ${Green_font_prefix} 1.安装q验证节点环境并生成钱包私钥导出 ${Font_color_suffix}
+ ${Green_font_prefix} 1.安装q验证节点环境,需要导入keystore文件到keystore文件夹下面 ${Font_color_suffix}
  ${Green_font_prefix} 2.配置文件并运行q验证者节点 ${Font_color_suffix}
  ${Green_font_prefix} 3.重启q验证者节点 ${Font_color_suffix}
  ———————————————————————" && echo
