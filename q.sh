@@ -30,8 +30,9 @@ install_q_validator_node_and_export_key() {
 config_and_run_q_validator_node() {
     read -e -p "请输入你的服务器公共地址ip：" IP_ADDRESS
     read -e -p "请输入你的验证者名称：" VALIDATOR_NAME
+    read -e -p "请输入钱包地址，注意：以0x开头" QADDRESS
     cd /root/testnet-public-tools/testnet-validator
-    QADDRESS=$(cat /root/testnet-public-tools/testnet-validator/q_address.txt | grep 'Public address of the key:' | awk '{print $6}')
+    # QADDRESS=$(cat /root/testnet-public-tools/testnet-validator/q_address.txt | grep 'Public address of the key:' | awk '{print $6}')
     QADDRESSWITHOUT0x=${QADDRESS:2}
     sed -i "s/0000000000000000000000000000000000000000/$QADDRESSWITHOUT0x/g" /root/testnet-public-tools/testnet-validator/.env
     sed -i "s/192.0.0.0/$IP_ADDRESS/g" /root/testnet-public-tools/testnet-validator/.env
@@ -49,9 +50,11 @@ restart_q_validator_node() {
     docker-compose logs -f --tail "100"
 }
 
-echo && echo -e "
+echo && echo -e " ${Red_font_prefix}q_blockchain 一键安装脚本${Font_color_suffix} by \033[1;35moooooyoung\033[0m
+此脚本完全免费开源, 由推特用户 ${Green_font_prefix}@ouyoung11开发${Font_color_suffix}, 
+欢迎关注, 如有收费请勿上当受骗。
  ———————————————————————
- ${Green_font_prefix} 1.安装q验证节点环境:注意，需要自行把keysotre文件上传 ${Font_color_suffix}
+ ${Green_font_prefix} 1.安装q验证节点环境并生成钱包私钥导出 ${Font_color_suffix}
  ${Green_font_prefix} 2.配置文件并运行q验证者节点 ${Font_color_suffix}
  ${Green_font_prefix} 3.重启q验证者节点 ${Font_color_suffix}
  ———————————————————————" && echo
