@@ -50,11 +50,17 @@ restart_q_validator_node() {
     docker-compose logs -f --tail "100"
 }
 
+check_status_q_node() {
+    cd /root/testnet-public-tools/testnet-validator
+    docker-compose logs -f --tail "100"
+}
+
 echo && echo -e " 
  ———————————————————————
  ${Green_font_prefix} 1.安装q验证节点环境,需要导入keystore文件到keystore文件夹下面 ${Font_color_suffix}
  ${Green_font_prefix} 2.配置文件并运行q验证者节点 ${Font_color_suffix}
  ${Green_font_prefix} 3.重启q验证者节点 ${Font_color_suffix}
+ ${Green_font_prefix} 4.每次重启finalshell查看验证者节点 ${Font_color_suffix}
  ———————————————————————" && echo
 read -e -p " 请参照教程执行以上步骤，请输入数字 [1-3]:" num
 case "$num" in
@@ -67,6 +73,9 @@ case "$num" in
 3)
     restart_q_validator_node
     ;;
+4) 
+    check_status_q_node
+    ;;    
 *)
     echo
     echo -e " ${Error} 请输入正确的数字"
